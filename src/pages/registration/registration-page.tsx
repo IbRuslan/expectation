@@ -2,7 +2,7 @@ import { FormSignUpValues, SignUp } from '@/components/auth'
 import { useRegistrationMutation } from '@/services/auth/auth.service'
 
 export const RegistrationPage = () => {
-  const [registration, { error, isError, isLoading }] = useRegistrationMutation()
+  const [registration] = useRegistrationMutation()
 
   const onSubmitHandler = async (data: FormSignUpValues) => {
     try {
