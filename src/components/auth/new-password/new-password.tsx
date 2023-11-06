@@ -37,8 +37,8 @@ export const NewPassword = (props: NewPasswordProps) => {
             control={control}
             label={'Password'}
             name={'password'}
-            password
             placeholder={'Password'}
+            type={'password'}
           />
         </div>
         <Typography className={s.description} variant={'body2'}>
