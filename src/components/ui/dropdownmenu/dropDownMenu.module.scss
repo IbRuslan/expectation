@@ -1,0 +1,109 @@
+@mixin contentDropMenu() {
+  will-change: transform, opacity;
+
+  z-index: 100;
+  right: 50px;
+
+  min-width: 130px;
+  padding: 12px;
+
+  background-color: var(--color-light-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 5px;
+  box-shadow:
+    0 10px 38px -10px rgb(22 23 24 / 35%),
+    0 10px 20px -15px rgb(22 23 24 / 20%);
+
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.2, 2, 0.3, 1);
+
+  .itemwrapper .item:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .itemwrapper .item:last-child {
+    padding-bottom: 0;
+  }
+
+  @media (width <= 1300px) {
+    right: 5px;
+  }
+}
+
+.item {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: start;
+
+  padding: 12px 0;
+
+  font-size: 14px;
+  color: var(--color-dark-500);
+
+  border-top: 1px solid var(--color-dark-100);
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.email {
+  all: unset;
+  color: var(--color-dark-100);
+}
+
+.profiledrop {
+  @include contentDropMenu;
+
+  position: relative;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.default {
+  @include contentDropMenu;
+
+  position: relative;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.iconButton {
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  font-family: inherit;
+  color: var(--violet-11);
+
+  border: 1px solid var(--color-dark-500);
+  border-radius: 100%;
+  box-shadow: 0 2px 10px var(--black-a7);
+}
+
+.IconButton:hover {
+  background-color: var(--violet-3);
+}
+
+.IconButton:focus {
+  box-shadow: 0 0 0 2px black;
+}

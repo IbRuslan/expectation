@@ -1,0 +1,83 @@
+.trigger {
+  all: unset;
+
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-around;
+
+  min-width: 120px;
+  height: 40px;
+  padding: 2px;
+
+  font-size: 16px;
+
+  background-color: var(--color-light-300);
+  border: 1px solid var(--color-accent-500);
+  border-radius: 3px;
+
+  &[data-state='open'] {
+    border-radius: 3px 3px 0 0;
+  }
+
+  &:hover {
+    background: var(--color-accent-100);
+  }
+}
+
+.disabled {
+  color: var(--dark-300, #4c4c4c);
+  border: 1px solid var(--dark-300, #4c4c4c);
+
+  &:hover {
+    background-color: inherit;
+  }
+}
+
+.content {
+  all: unset;
+
+  z-index: 10;
+
+  font-size: 16px;
+
+  background-color: var(--color-light-300);
+  border: 1px solid var(--color-accent-500);
+  border-radius: 0 0 3px 3px;
+}
+
+.item {
+  all: unset;
+  min-width: 105px;
+  padding: 3px 7px;
+  text-align: start;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: var(--color-accent-100);
+  }
+}
+
+.label {
+  position: absolute;
+  top: -25px;
+  left: 0;
+
+  display: flex;
+
+  margin-bottom: 100px;
+}
+
+.arrows {
+  position: absolute;
+  top: 14px;
+  right: 2px;
+}

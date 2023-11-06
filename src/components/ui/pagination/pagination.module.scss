@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.dots {
+  margin: 2px;
+  padding: 5px;
+}
+
+.page {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  margin: 1px;
+  padding: 14px;
+
+  border: 1px solid var(--color-dark-900);
+  border-radius: 5px;
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+}
+
+.active {
+  color: var(--color-dark-900);
+  background-color: var(--color-light-100);
+}
+
+.select {
+  display: inline-flex;
+  gap: 5px;
+}

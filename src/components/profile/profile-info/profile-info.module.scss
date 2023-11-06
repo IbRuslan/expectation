@@ -1,0 +1,60 @@
+.wrapper {
+  max-width: 420px;
+  margin: 36px auto;
+  padding: 33px;
+}
+
+.title {
+  margin-bottom: 27px;
+  text-align: center;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.name {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+
+  color: var(--color-dark-900);
+  text-align: center;
+}
+
+.editIcon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  margin: 0;
+  color: red;
+}
+
+.email {
+  margin: 10px 0 40px;
+  color: var(--color-dark-900);
+  text-align: center;
+  opacity: 0.5;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+
+  margin-bottom: 20px;
+  padding: 6px 28px;
+}
