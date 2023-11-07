@@ -10,7 +10,7 @@ type ProfileInfoProps = {
   changeAvatar: (value: string) => void
   changeName: (value: string) => void
   onLogout: () => void
-  userInfo: AuthTypesData
+  userInfo: Omit<AuthTypesData, 'id'>
 }
 
 export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps) => {

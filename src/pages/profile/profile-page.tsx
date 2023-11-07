@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ProfileInfo } from '@/components/profile'
 import { Header } from '@/components/ui'
-import { useAppSelector } from '@/services/store.ts'
+import { useAppSelector } from '@/services/store'
 
 export const ProfilePage = () => {
   const navigate = useNavigate()
