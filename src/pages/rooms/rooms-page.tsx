@@ -1,11 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Rooms } from '@/components/rooms'
 import { Header, Select, Typography } from '@/components/ui'
+import { useAuthMeMutation } from '@/services/auth/auth.service'
+import { authMe, isAuth } from '@/services/auth/auth.slice'
+import { useAppDispatch } from '@/services/store'
+import { getFromLocalStorage } from '@/utils/getFromLocalStorage'
 
 import s from './rooms-page.module.scss'
 
 export const RoomsPage = () => {
+  const [auth, { data, isError }] = useAuthMeMutation()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (!isError) {
+      dispatch(authMe({ ...data, isAuth: true }))
+    } else {
+      dispatch(isAuth(false))
+    }
+  }, [data, dispatch, isError])
+
+  useEffect(() => {
+    const token = getFromLocalStorage('token')
+
+    if (token !== 0) {
+      auth(token)
+    } else {
+      /* empty */
+    }
+  }, [auth])
+
   const [value, setValue] = useState('Все')
   const [valueBuy, setValueBuy] = useState('Все')
   const [city, setCity] = useState('Вся страна')
@@ -63,7 +88,7 @@ export const RoomsPage = () => {
     },
     {
       city: 'Ташкент',
-      id: '2',
+      id: '3',
       photo: [
         'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
         'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
@@ -74,7 +99,7 @@ export const RoomsPage = () => {
     },
     {
       city: 'Ташкент',
-      id: '2',
+      id: '4',
       photo: [
         'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
         'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
@@ -85,7 +110,7 @@ export const RoomsPage = () => {
     },
     {
       city: 'Ташкент',
-      id: '2',
+      id: '5',
       photo: [
         'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
         'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
@@ -96,7 +121,7 @@ export const RoomsPage = () => {
     },
     {
       city: 'Самарканд',
-      id: '3',
+      id: '6',
       photo: ['https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg'],
       price: '320.000.000',
       title: 'Двух-комнатная квартира',
@@ -104,7 +129,7 @@ export const RoomsPage = () => {
     },
     {
       city: 'Самарканд',
-      id: '3',
+      id: '7',
       photo: ['https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg'],
       price: '3.000.000',
       title: 'Двух-комнатная квартира',

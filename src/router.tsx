@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { NotFound, ProfilePage, RegistrationPage, RoomsPage, SignInPage } from '@/pages'
+import { useAppSelector } from '@/services/store'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -59,7 +60,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const isAuthenticated = useAppSelector(state => state.auth.isAuth)
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }

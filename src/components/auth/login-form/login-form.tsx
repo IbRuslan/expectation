@@ -14,14 +14,14 @@ const loginSchema = z.object({
   rememberMe: z.boolean().default(false),
 })
 
-type FormValues = z.infer<typeof loginSchema>
+export type FormLoginValues = z.infer<typeof loginSchema>
 
 type LoginFormProps = {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (dataForm: FormLoginValues) => void
 }
 
 export const LoginForm = (props: LoginFormProps) => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormLoginValues>({
     defaultValues: { email: '', password: '', rememberMe: false },
     mode: 'onSubmit',
     resolver: zodResolver(loginSchema),

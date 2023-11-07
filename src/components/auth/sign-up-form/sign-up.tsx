@@ -33,7 +33,7 @@ const signUpSchema = z
 export type FormSignUpValues = z.infer<typeof signUpSchema>
 
 type SignUpProps = {
-  onSubmit: (data: FormSignUpValues) => void
+  onSubmit: (dataForm: FormSignUpValues) => void
 }
 
 export const SignUp = (props: SignUpProps) => {

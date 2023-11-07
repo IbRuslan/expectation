@@ -2,20 +2,38 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { Ads, Change, HeartTrue, Logo, LogoutIcon } from '@/assets/icons'
 import { Avatar, Button, DropDownItem, DropDownMenu, TextField, Typography } from '@/components/ui'
+import { authMe } from '@/services/auth/auth.slice'
+import { useAppDispatch, useAppSelector } from '@/services/store'
+import { removeFromLocalStorage } from '@/utils/removeFromLocalStorage'
 import { useWindowSize } from '@/utils/useWindowsSize'
 
 import s from './header.module.scss'
 
 export const Header = () => {
+  const data = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+
   const windowSize = useWindowSize()
 
-  const isAuth = true
-  const email = 'ribragimov2003@gmail.com'
-  const name = 'Ruslan'
+  const isAuth = data.isAuth
 
   const navigate = useNavigate()
   const onSelectNavigateLogOut = () => {
-    navigate('/login')
+    const data = {
+      created_at: '',
+      email: '',
+      email_verified_at: null,
+      id: '',
+      isAuth: false,
+      login: '',
+      phone: null,
+      token: '',
+      updated_at: '',
+    }
+
+    removeFromLocalStorage('token')
+    dispatch(authMe(data))
+    navigate('/')
   }
 
   return (
@@ -48,7 +66,7 @@ export const Header = () => {
             {isAuth ? (
               <DropDownMenu trigger={<Avatar />} variant={'profiledrop'}>
                 <DropDownItem
-                  el={{ email, icon: <Avatar />, title: name }}
+                  el={{ email: data.email, icon: <Avatar />, title: data.login }}
                   onSelect={() => navigate('/profile')}
                 />
                 <DropDownItem
@@ -66,8 +84,11 @@ export const Header = () => {
               </DropDownMenu>
             ) : (
               <DropDownMenu trigger={<Avatar />} variant={'profiledrop'}>
-                <DropDownItem el={{ title: 'Зарегистрироваться' }} onSelect={() => {}} />
-                <DropDownItem el={{ title: 'Войти' }} onSelect={onSelectNavigateLogOut} />
+                <DropDownItem
+                  el={{ title: 'Зарегистрироваться' }}
+                  onSelect={() => navigate('/registration')}
+                />
+                <DropDownItem el={{ title: 'Войти' }} onSelect={() => navigate('/login')} />
               </DropDownMenu>
             )}
           </div>

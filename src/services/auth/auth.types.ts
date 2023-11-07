@@ -1,9 +1,10 @@
-export type FormSignUpData = {
+export type AuthTypesData = {
+  created_at: string
   email: string
+  email_verified_at: null | string
+  id: number
   login: string
-  password: string
-  phone?: string
-}
-export type SignUpRequestData = {
-  data: FormSignUpData
+  phone: null | string
+  token: string
+  updated_at: string
 }
