@@ -14,7 +14,7 @@ export const RoomsPage = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (!isError) {
+    if (!isError && data) {
       dispatch(authMe({ ...data, isAuth: true }))
     } else {
       dispatch(isAuth(false))

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const authSlice = createSlice({
   initialState: {
+    avatar: null,
     created_at: '',
     email: '',
     email_verified_at: null,
@@ -15,9 +16,20 @@ export const authSlice = createSlice({
   name: 'auth',
   reducers: {
     authMe: (state, action) => {
-      const { created_at, email, email_verified_at, id, isAuth, login, phone, token, updated_at } =
-        action.payload
+      const {
+        avatar,
+        created_at,
+        email,
+        email_verified_at,
+        id,
+        isAuth,
+        login,
+        phone,
+        token,
+        updated_at,
+      } = action.payload
 
+      state.avatar = avatar
       state.created_at = created_at
       state.email = email
       state.email_verified_at = email_verified_at

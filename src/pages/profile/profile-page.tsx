@@ -2,16 +2,12 @@ import { useNavigate } from 'react-router-dom'
 
 import { ProfileInfo } from '@/components/profile'
 import { Header } from '@/components/ui'
+import { useAppSelector } from '@/services/store.ts'
 
 export const ProfilePage = () => {
   const navigate = useNavigate()
 
-  const userInfo = {
-    avatar: '',
-    email: 'ribragimov2003@gmail.com',
-    userName: 'Ruslan',
-    userPhone: '',
-  }
+  const userInfo = useAppSelector(state => state.auth)
 
   const onChangeNameHandler = (value: string) => {
     console.log(value)

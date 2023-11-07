@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { ChangeIcon, LogoutIcon } from '@/assets/icons'
 import { Avatar, Button, Card, TextField, Typography } from '@/components/ui'
+import { AuthTypesData } from '@/services/auth/auth.types'
 
 import s from './profile-info.module.scss'
 
@@ -9,11 +10,11 @@ type ProfileInfoProps = {
   changeAvatar: (value: string) => void
   changeName: (value: string) => void
   onLogout: () => void
-  userInfo: { avatar: string; email: string; userName: string; userPhone: string }
+  userInfo: AuthTypesData
 }
 
 export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps) => {
-  const [value, setValue] = useState(userInfo.userName)
+  const [value, setValue] = useState(userInfo.login)
   const [open, setOpen] = useState(false)
   const [error, setError] = useState('')
 
@@ -57,7 +58,7 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps
       ) : (
         <Typography as={'h3'} className={s.name} variant={'body1'}>
           <>
-            {userInfo.userName}
+            {userInfo.login}
             <div className={s.editIcon} onClick={() => setOpen(true)}>
               <ChangeIcon />
             </div>
