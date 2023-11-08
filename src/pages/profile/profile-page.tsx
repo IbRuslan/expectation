@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ProfileInfo } from '@/components/profile'
 import { Header } from '@/components/ui'
-import { AuthTypesData, useAuthMeQuery } from '@/services'
+import { useAuthMeQuery } from '@/services'
 import { getFromLocalStorage, removeFromLocalStorage } from '@/utils'
 
 export const ProfilePage = () => {
