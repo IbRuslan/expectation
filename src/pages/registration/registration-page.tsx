@@ -1,27 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { FormSignUpValues, SignUp } from '@/components/auth'
-import { useRegistrationMutation } from '@/services/auth/auth.service'
-import { authMe } from '@/services/auth/auth.slice'
-import { useAppDispatch, useAppSelector } from '@/services/store'
-import { addToLocalStorage } from '@/utils/setToLocalStorage'
+import { useRegistrationMutation } from '@/services'
+import { addToLocalStorage, getFromLocalStorage } from '@/utils'
 
 export const RegistrationPage = () => {
   const [registration, { data, isError }] = useRegistrationMutation()
-
-  const dispatch = useAppDispatch()
-
-  const isAuthenticated = useAppSelector(state => state.auth.isAuth)
+  const [isAuth, setIsAuth] = useState(false)
 
   useEffect(() => {
     if (!isError && data) {
       addToLocalStorage('token', data.token)
-      dispatch(authMe({ ...data, isAuth: true }))
+      addToLocalStorage('avatar', data.avatar)
+      addToLocalStorage('login', data.login)
+      addToLocalStorage('email', data.email)
+      setIsAuth(true)
     } else {
       /* empty */
     }
-  }, [data, dispatch, isError])
+  }, [data, isError])
 
   const onSubmitHandler = (dataForm: FormSignUpValues) => {
     const requestData = JSON.stringify({
@@ -34,7 +32,9 @@ export const RegistrationPage = () => {
     registration(requestData)
   }
 
-  if (isAuthenticated) {
+  const token = getFromLocalStorage('token')
+
+  if (token !== 0 || isAuth) {
     return <Navigate replace to={'/'} />
   }
 

@@ -1,36 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Rooms } from '@/components/rooms'
 import { Header, Select, Typography } from '@/components/ui'
-import { useAuthMeMutation } from '@/services/auth/auth.service'
-import { authMe, isAuth } from '@/services/auth/auth.slice'
-import { useAppDispatch } from '@/services/store'
-import { getFromLocalStorage } from '@/utils/getFromLocalStorage'
 
 import s from './rooms-page.module.scss'
 
 export const RoomsPage = () => {
-  const [auth, { data, isError }] = useAuthMeMutation()
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    if (!isError && data) {
-      dispatch(authMe({ ...data, isAuth: true }))
-    } else {
-      dispatch(isAuth(false))
-    }
-  }, [data, dispatch, isError])
-
-  useEffect(() => {
-    const token = getFromLocalStorage('token')
-
-    if (token !== 0) {
-      auth(token)
-    } else {
-      /* empty */
-    }
-  }, [auth])
-
   const [value, setValue] = useState('Все')
   const [valueBuy, setValueBuy] = useState('Все')
   const [city, setCity] = useState('Вся страна')

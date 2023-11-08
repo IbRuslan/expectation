@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 
 import { ChangeIcon, LogoutIcon } from '@/assets/icons'
 import { Avatar, Button, Card, TextField, Typography } from '@/components/ui'
-import { AuthTypesData } from '@/services/auth/auth.types'
+import { AuthTypesData } from '@/services'
 
 import s from './profile-info.module.scss'
 
@@ -10,7 +10,7 @@ type ProfileInfoProps = {
   changeAvatar: (value: string) => void
   changeName: (value: string) => void
   onLogout: () => void
-  userInfo: Omit<AuthTypesData, 'id'>
+  userInfo: AuthTypesData
 }
 
 export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps) => {

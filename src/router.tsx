@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { NotFound, ProfilePage, RegistrationPage, RoomsPage, SignInPage } from '@/pages'
-import { useAppSelector } from '@/services/store'
+import { getFromLocalStorage } from '@/utils/getFromLocalStorage'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -60,7 +60,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = useAppSelector(state => state.auth.isAuth)
+  const isAuthenticated = getFromLocalStorage('token')
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated !== 0 ? <Outlet /> : <Navigate to={'/login'} />
 }

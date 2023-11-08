@@ -1,20 +1,17 @@
-import { AuthTypesData } from '@/services/auth/auth.types'
-import { baseApi } from '@/services/base-api'
+import { AuthTypesData, baseApi } from '@/services'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    authMe: builder.mutation<AuthTypesData, string>({
-      invalidatesTags: ['Me'],
+    authMe: builder.query<AuthTypesData, string>({
+      providesTags: ['user'],
       query: body => ({
         headers: {
           Authorization: `Bearer ${body}`,
         },
-        method: 'POST',
         url: '/user/me',
       }),
     }),
     login: builder.mutation<AuthTypesData, string>({
-      invalidatesTags: ['Me'],
       query: body => ({
         body,
         method: 'POST',
@@ -22,7 +19,6 @@ export const authService = baseApi.injectEndpoints({
       }),
     }),
     registration: builder.mutation<AuthTypesData, string>({
-      invalidatesTags: ['Me'],
       query: body => ({
         body,
         method: 'POST',
@@ -32,4 +28,4 @@ export const authService = baseApi.injectEndpoints({
   }),
 })
 
-export const { useAuthMeMutation, useLoginMutation, useRegistrationMutation } = authService
+export const { useAuthMeQuery, useLoginMutation, useRegistrationMutation } = authService

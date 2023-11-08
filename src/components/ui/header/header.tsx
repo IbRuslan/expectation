@@ -2,37 +2,41 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { Ads, Change, HeartTrue, Logo, LogoutIcon } from '@/assets/icons'
 import { Avatar, Button, DropDownItem, DropDownMenu, TextField, Typography } from '@/components/ui'
-import { authMe } from '@/services/auth/auth.slice'
-import { useAppDispatch, useAppSelector } from '@/services/store'
-import { removeFromLocalStorage } from '@/utils/removeFromLocalStorage'
-import { useWindowSize } from '@/utils/useWindowsSize'
+import { getFromLocalStorage, removeFromLocalStorage, useWindowSize } from '@/utils'
 
 import s from './header.module.scss'
 
 export const Header = () => {
-  const data = useAppSelector(state => state.auth)
-  const dispatch = useAppDispatch()
-
   const windowSize = useWindowSize()
 
-  const isAuth = data.isAuth
+  const getInfoFromLocalStorage = () => {
+    const avatar = getFromLocalStorage('avatar')
+    const login = getFromLocalStorage('login')
+    const email = getFromLocalStorage('email')
+
+    return { avatar, email, login }
+  }
+
+  const data = getInfoFromLocalStorage()
+
+  const getIsAuth = () => {
+    const result = getFromLocalStorage('token')
+
+    if (result === 0) {
+      return false
+    }
+
+    return true
+  }
+
+  const isAuth = getIsAuth()
 
   const navigate = useNavigate()
   const onSelectNavigateLogOut = () => {
-    const data = {
-      created_at: '',
-      email: '',
-      email_verified_at: null,
-      id: '',
-      isAuth: false,
-      login: '',
-      phone: null,
-      token: '',
-      updated_at: '',
-    }
-
+    removeFromLocalStorage('avatar')
+    removeFromLocalStorage('login')
+    removeFromLocalStorage('email')
     removeFromLocalStorage('token')
-    dispatch(authMe(data))
     navigate('/')
   }
 

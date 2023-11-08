@@ -2,12 +2,15 @@ import { useNavigate } from 'react-router-dom'
 
 import { ProfileInfo } from '@/components/profile'
 import { Header } from '@/components/ui'
-import { useAppSelector } from '@/services/store'
+import { AuthTypesData, useAuthMeQuery } from '@/services'
+import { getFromLocalStorage, removeFromLocalStorage } from '@/utils'
 
 export const ProfilePage = () => {
   const navigate = useNavigate()
 
-  const userInfo = useAppSelector(state => state.auth)
+  const token: string = getFromLocalStorage('token')
+
+  const { data: users } = useAuthMeQuery(token)
 
   const onChangeNameHandler = (value: string) => {
     console.log(value)
@@ -16,7 +19,15 @@ export const ProfilePage = () => {
     console.log(value)
   }
   const onLogoutHandler = () => {
-    navigate('/login')
+    removeFromLocalStorage('avatar')
+    removeFromLocalStorage('login')
+    removeFromLocalStorage('email')
+    removeFromLocalStorage('token')
+    navigate('/')
+  }
+
+  if (!users) {
+    return <div>loading...</div>
   }
 
   return (
@@ -26,7 +37,7 @@ export const ProfilePage = () => {
         changeAvatar={onChangeAvatarHandler}
         changeName={onChangeNameHandler}
         onLogout={onLogoutHandler}
-        userInfo={userInfo}
+        userInfo={users}
       />
     </>
   )
