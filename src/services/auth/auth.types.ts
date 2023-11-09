@@ -9,3 +9,10 @@ export type AuthTypesData = {
   token: string
   updated_at: string
 }
+
+export type changeProfileType = {
+  avatar?: FormData
+  login?: string
+  password?: string
+  token: string
+}

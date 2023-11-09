@@ -6,7 +6,11 @@ import { getFromLocalStorage, removeFromLocalStorage, useWindowSize } from '@/ut
 
 import s from './header.module.scss'
 
-export const Header = () => {
+type HeaderPropsType = {
+  search?: boolean
+}
+
+export const Header = ({ search = false }: HeaderPropsType) => {
   const windowSize = useWindowSize()
 
   const getInfoFromLocalStorage = () => {
@@ -52,12 +56,16 @@ export const Header = () => {
             <Logo />
           )}
         </div>
-        <div className={s.searchWrapper}>
-          <TextField className={s.search} placeholder={'найти жилье'} search />
-        </div>
+        {search ? (
+          <div className={s.searchWrapper}>
+            <TextField className={s.search} placeholder={'найти жилье'} search />
+          </div>
+        ) : (
+          ''
+        )}
         <div className={s.auth}>
           <div className={s.button}>
-            <Button as={Link} className={s.buttonLink} to={'/ads'} variant={'link'}>
+            <Button as={Link} className={s.buttonLink} to={'/adsPage'} variant={'link'}>
               {windowSize > 710 ? 'Сдать жилье на Uzbnb' : <Ads />}
             </Button>
           </div>
@@ -79,7 +87,7 @@ export const Header = () => {
                 />
                 <DropDownItem
                   el={{ icon: <Ads />, title: 'Мои Обьявления' }}
-                  onSelect={() => navigate('/ads')}
+                  onSelect={() => navigate('/adsPage')}
                 />
                 <DropDownItem
                   el={{ icon: <LogoutIcon />, title: 'Выйти' }}

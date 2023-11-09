@@ -8,7 +8,7 @@ import { z } from 'zod'
 
 import s from './sign-up.module.scss'
 
-const phoneRegex = /\+998\(\d{2}\)\d{3}-\d{2}-\d{2}/
+const phoneRegex = /\+998\d{9}/
 
 const signUpSchema = z
   .object({

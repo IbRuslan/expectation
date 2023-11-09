@@ -2,10 +2,15 @@ import { useState } from 'react'
 
 import { Rooms } from '@/components/rooms'
 import { Header, Select, Typography } from '@/components/ui'
+import { useGetRoomsQuery } from '@/services/rooms'
 
 import s from './rooms-page.module.scss'
 
 export const RoomsPage = () => {
+  const { data: rooms } = useGetRoomsQuery({})
+
+  console.log(rooms)
+
   const [value, setValue] = useState('Все')
   const [valueBuy, setValueBuy] = useState('Все')
   const [city, setCity] = useState('Вся страна')
@@ -37,7 +42,7 @@ export const RoomsPage = () => {
 
   const count = 7
 
-  const rooms = [
+  const roomsProto = [
     {
       city: 'Ташкент',
       id: '1',
@@ -114,7 +119,7 @@ export const RoomsPage = () => {
 
   return (
     <>
-      <Header />
+      <Header search />
       <div className={s.container}>
         <div className={s.filters}>
           <Typography as={'h3'} className={s.title} variant={'h1'}>
@@ -157,7 +162,7 @@ export const RoomsPage = () => {
             {`Найдено ${count} обьявлений`}
           </Typography>
           <div className={s.rooms_wrapper}>
-            {rooms.map(room => (
+            {roomsProto.map(room => (
               <Rooms key={room.id} room={room} />
             ))}
           </div>

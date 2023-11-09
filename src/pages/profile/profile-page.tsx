@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ProfileInfo } from '@/components/profile'
 import { Header } from '@/components/ui'
-import { useAuthMeQuery } from '@/services'
+import { useAuthMeQuery, useChangeProfileMutation } from '@/services'
 import { getFromLocalStorage, removeFromLocalStorage } from '@/utils'
 
 export const ProfilePage = () => {
@@ -11,12 +11,17 @@ export const ProfilePage = () => {
   const token: string = getFromLocalStorage('token')
 
   const { data: users } = useAuthMeQuery(token)
+  const [changeProfile] = useChangeProfileMutation()
 
   const onChangeNameHandler = (value: string) => {
-    console.log(value)
+    changeProfile({ login: value, token })
   }
-  const onChangeAvatarHandler = (value: string) => {
-    console.log(value)
+  const onChangeAvatarHandler = (value: File) => {
+    const formData = new FormData()
+
+    formData.append('avatar', value)
+
+    changeProfile({ formData, token })
   }
   const onLogoutHandler = () => {
     removeFromLocalStorage('avatar')

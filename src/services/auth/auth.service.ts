@@ -11,6 +11,17 @@ export const authService = baseApi.injectEndpoints({
         url: '/user/me',
       }),
     }),
+    changeProfile: builder.mutation<any, any>({
+      invalidatesTags: ['user'],
+      query: ({ token, ...body }) => ({
+        body: body,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        method: 'POST',
+        url: '/user/updateUser',
+      }),
+    }),
     login: builder.mutation<AuthTypesData, string>({
       query: body => ({
         body,
@@ -28,4 +39,9 @@ export const authService = baseApi.injectEndpoints({
   }),
 })
 
-export const { useAuthMeQuery, useLoginMutation, useRegistrationMutation } = authService
+export const {
+  useAuthMeQuery,
+  useChangeProfileMutation,
+  useLoginMutation,
+  useRegistrationMutation,
+} = authService

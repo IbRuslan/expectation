@@ -7,13 +7,13 @@ import { AuthTypesData } from '@/services'
 import s from './profile-info.module.scss'
 
 type ProfileInfoProps = {
-  changeAvatar: (value: string) => void
+  changeAvatar: (value: File) => void
   changeName: (value: string) => void
   onLogout: () => void
   userInfo: AuthTypesData
 }
 
-export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps) => {
+export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: ProfileInfoProps) => {
   const [value, setValue] = useState(userInfo.login)
   const [open, setOpen] = useState(false)
   const [error, setError] = useState('')
@@ -37,6 +37,18 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps
     setValue(event.currentTarget.value)
   }
 
+  const onChangeProfilePhotoHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      if (file.size < 4000000) {
+        props.changeAvatar(file)
+      } else {
+        console.log('Файл слишком большого размера')
+      }
+    }
+  }
+
   return (
     <Card className={s.wrapper}>
       <Typography as={'h2'} className={s.title} variant={'large'}>
@@ -44,7 +56,15 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo }: ProfileInfoProps
       </Typography>
       <div className={s.icon}>
         <Avatar size={'100'} src={userInfo.avatar ? userInfo.avatar : ''} />
-        <ChangeIcon />
+        <label className={s.editIcon} htmlFor={'upload'}>
+          <ChangeIcon />
+          <input
+            id={'upload'}
+            onChange={onChangeProfilePhotoHandler}
+            style={{ display: 'none' }}
+            type={'file'}
+          />
+        </label>
       </div>
       {open ? (
         <>

@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { NotFound, ProfilePage, RegistrationPage, RoomsPage, SignInPage } from '@/pages'
+import { AdsPage, NotFound, ProfilePage, RegistrationPage, RoomsPage, SignInPage } from '@/pages'
 import { getFromLocalStorage } from '@/utils/getFromLocalStorage'
 
 const publicRoutes: RouteObject[] = [
@@ -34,8 +34,8 @@ const privateRoutes: RouteObject[] = [
     path: '/profile',
   },
   {
-    element: <div>Мои Обьявления</div>,
-    path: '/ads',
+    element: <AdsPage />,
+    path: '/adsPage',
   },
   {
     element: <div>Избранное</div>,

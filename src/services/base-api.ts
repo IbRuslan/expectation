@@ -6,7 +6,7 @@ export const baseApi = createApi({
     prepareHeaders: headers => {
       headers.append('Referer', 'false')
       headers.append('Accept', '*/*')
-      headers.append('Content-Type', 'application/json')
+      // headers.append('Content-Type', 'application/json')
     },
   }),
   endpoints: () => ({}),

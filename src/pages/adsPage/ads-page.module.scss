@@ -1,0 +1,43 @@
+.container_item {
+  display: flex;
+  justify-content: center;
+
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 30px;
+}
+
+.title_button {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 23px;
+  color: var(--color-dark-500);
+}
+
+.button_ads {
+  padding: 10px;
+}
+
+.rooms_wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+
+  @media (width <= 1300px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (width <= 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (width <= 670px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
