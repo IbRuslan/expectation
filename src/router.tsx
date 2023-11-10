@@ -12,6 +12,7 @@ import {
   NotFound,
   ProfilePage,
   RegistrationPage,
+  RoomPage,
   RoomsPage,
   SignInPage,
 } from '@/pages'
@@ -31,7 +32,7 @@ const publicRoutes: RouteObject[] = [
     path: '/registration',
   },
   {
-    element: <div>Rooms</div>,
+    element: <RoomPage />,
     path: '/rooms/:roomsId',
   },
 ]

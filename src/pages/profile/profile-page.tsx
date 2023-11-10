@@ -11,7 +11,7 @@ export const ProfilePage = () => {
   const token: string = getFromLocalStorage('token')
 
   const { data: users } = useAuthMeQuery(token)
-  const [changeProfile, { isError }] = useChangeProfileMutation()
+  const [changeProfile, { isError, isLoading }] = useChangeProfileMutation()
 
   if (!isError && users) {
     addToLocalStorage('avatar', users.avatar)
@@ -42,6 +42,7 @@ export const ProfilePage = () => {
   return (
     <>
       <Header />
+      {isLoading ? <LinearLoader /> : ''}
       {!users ? (
         <LinearLoader />
       ) : (

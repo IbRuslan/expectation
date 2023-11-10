@@ -50,7 +50,7 @@ export const Header = ({ search = false }: HeaderPropsType) => {
         <div className={s.brand}>
           {windowSize > 710 ? (
             <Typography as={Link} className={s.pageName} to={'/'} variant={'h1'}>
-              <Logo /> Uzbnb
+              <Logo /> Accommodo
             </Typography>
           ) : (
             <Logo />
@@ -66,7 +66,7 @@ export const Header = ({ search = false }: HeaderPropsType) => {
         <div className={s.auth}>
           <div className={s.button}>
             <Button as={Link} className={s.buttonLink} to={'/adsPage'} variant={'link'}>
-              {windowSize > 710 ? 'Сдать жилье на Uzbnb' : <Ads />}
+              {windowSize > 710 ? 'Разместить обьявления' : <Ads />}
             </Button>
           </div>
           <div className={s.change}>

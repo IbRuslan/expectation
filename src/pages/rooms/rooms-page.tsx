@@ -1,15 +1,13 @@
 import { useState } from 'react'
 
 import { Rooms } from '@/components/rooms'
-import { Header, Select, Typography } from '@/components/ui'
+import { Header, LinearLoader, Select, Typography } from '@/components/ui'
 import { useGetRoomsQuery } from '@/services/rooms'
 
 import s from './rooms-page.module.scss'
 
 export const RoomsPage = () => {
   const { data: rooms } = useGetRoomsQuery({})
-
-  console.log(rooms)
 
   const [value, setValue] = useState('Все')
   const [valueBuy, setValueBuy] = useState('Все')
@@ -39,83 +37,6 @@ export const RoomsPage = () => {
   const onChangeCity = (value: any) => {
     setCity(value)
   }
-
-  const count = 7
-
-  const roomsProto = [
-    {
-      city: 'Ташкент',
-      id: '1',
-      photo: [
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-      ],
-      price: '2.000.000',
-      title: 'Сдаетсся одно-комнатная квартира',
-      type: 'Аренда',
-    },
-    {
-      city: 'Ташкент',
-      id: '2',
-      photo: [
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-      ],
-      price: '300.000.000',
-      title: 'Сдаетсся двух-комнатная квартира',
-      type: 'Продажа',
-    },
-    {
-      city: 'Ташкент',
-      id: '3',
-      photo: [
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-      ],
-      price: '4.000.000',
-      title: 'Сдаетсся двух-комнатная квартира',
-      type: 'Аренда',
-    },
-    {
-      city: 'Ташкент',
-      id: '4',
-      photo: [
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-      ],
-      price: '400.000.000',
-      title: 'Сдаетсся двух-комнатная квартира',
-      type: 'Продажа',
-    },
-    {
-      city: 'Ташкент',
-      id: '5',
-      photo: [
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-        'https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg',
-      ],
-      price: '4.000.000',
-      title: 'Сдаетсся двух-комнатная квартира',
-      type: 'Аренда',
-    },
-    {
-      city: 'Самарканд',
-      id: '6',
-      photo: ['https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg'],
-      price: '320.000.000',
-      title: 'Двух-комнатная квартира',
-      type: 'Продажа',
-    },
-    {
-      city: 'Самарканд',
-      id: '7',
-      photo: ['https://i.pinimg.com/originals/72/4c/5c/724c5c4c0267b7a3dd9c1ce1e808a505.jpg'],
-      price: '3.000.000',
-      title: 'Двух-комнатная квартира',
-      type: 'Аренда',
-    },
-  ]
 
   return (
     <>
@@ -157,18 +78,26 @@ export const RoomsPage = () => {
             </div>
           </div>
         </div>
-        <div className={s.container_item}>
-          <div>
-            <Typography as={'h3'} className={s.title} variant={'h1'}>
-              {`Найдено ${count} обьявлений`}
-            </Typography>
-            <div className={s.rooms_wrapper}>
-              {roomsProto.map(room => (
-                <Rooms key={room.id} room={room} />
-              ))}
+        {!rooms ? (
+          <LinearLoader />
+        ) : (
+          <div className={s.container_item}>
+            <div>
+              <Typography as={'h3'} className={s.title} variant={'h1'}>
+                {rooms.data.length < 4
+                  ? `Найдено ${rooms.data.length} обьявления`
+                  : `Найдено ${rooms.data.length} обьявлений`}
+              </Typography>
+              {!rooms.data ? (
+                <div>Обьявлений пока нет</div>
+              ) : (
+                <div className={s.rooms_wrapper}>
+                  {rooms?.data.map(room => <Rooms key={room.id} room={room} />)}
+                </div>
+              )}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   )
