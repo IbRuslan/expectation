@@ -120,51 +120,53 @@ export const RoomsPage = () => {
   return (
     <>
       <Header search />
-      <div className={s.container}>
-        <div className={s.filters}>
-          <Typography as={'h3'} className={s.title} variant={'h1'}>
-            Фильтры
-          </Typography>
-          <div className={s.selects}>
-            <div>
-              <Select
-                className={s.typeHouse}
-                label={'Тип'}
-                options={optionalBuy}
-                setValue={onChangeValueBuy}
-                value={valueBuy}
-              />
-            </div>
-            <div>
-              <Select
-                className={s.typeHouse}
-                label={'Недвижимость'}
-                options={optionalHouse}
-                setValue={onChangeValueType}
-                value={value}
-              />
-            </div>
-            <div>
-              <Select
-                className={s.typeHouse}
-                label={'Город'}
-                options={optionalCity}
-                setValue={onChangeCity}
-                value={city}
-              />
+      <div>
+        <div className={s.container}>
+          <div className={s.filters}>
+            <Typography as={'h3'} className={s.title} variant={'h1'}>
+              Фильтры
+            </Typography>
+            <div className={s.selects}>
+              <div>
+                <Select
+                  className={s.typeHouse}
+                  label={'Тип'}
+                  options={optionalBuy}
+                  setValue={onChangeValueBuy}
+                  value={valueBuy}
+                />
+              </div>
+              <div>
+                <Select
+                  className={s.typeHouse}
+                  label={'Недвижимость'}
+                  options={optionalHouse}
+                  setValue={onChangeValueType}
+                  value={value}
+                />
+              </div>
+              <div>
+                <Select
+                  className={s.typeHouse}
+                  label={'Город'}
+                  options={optionalCity}
+                  setValue={onChangeCity}
+                  value={city}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={s.container_item}>
-        <div>
-          <Typography as={'h3'} className={s.title} variant={'h1'}>
-            {`Найдено ${count} обьявлений`}
-          </Typography>
-          <div className={s.rooms_wrapper}>
-            {roomsProto.map(room => (
-              <Rooms key={room.id} room={room} />
-            ))}
+        <div className={s.container_item}>
+          <div>
+            <Typography as={'h3'} className={s.title} variant={'h1'}>
+              {`Найдено ${count} обьявлений`}
+            </Typography>
+            <div className={s.rooms_wrapper}>
+              {roomsProto.map(room => (
+                <Rooms key={room.id} room={room} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

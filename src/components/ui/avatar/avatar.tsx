@@ -8,7 +8,7 @@ type AvatarProps = {
 }
 
 export const Avatar = ({ size = '35', src }: AvatarProps) => {
-  const finalSrc = src ? src : avatarDefault
+  const finalSrc = src ? `https://test-backend-server.site/public/img/${src}` : avatarDefault
 
-  return <img alt={'avatar'} className={s.avatar} height={src} src={finalSrc} width={size} />
+  return <img alt={'avatar'} className={s.avatar} height={size} src={finalSrc} width={size} />
 }

@@ -1,24 +1,7 @@
 .container_item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 30px;
-
-  text-align: center;
-}
-
-.title_button {
-  display: flex;
-  justify-content: space-around;
-
-  @media (width <= 670px) {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
 }
 
 .title {
@@ -37,14 +20,6 @@
 .button {
   margin-top: 20px;
   padding: 10px;
-}
-
-.button_ads {
-  padding: 10px;
-
-  @media (width <= 670px) {
-    padding: 5px;
-  }
 }
 
 .rooms_wrapper {

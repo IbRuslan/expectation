@@ -14,7 +14,7 @@ export const authService = baseApi.injectEndpoints({
     changeProfile: builder.mutation<any, any>({
       invalidatesTags: ['user'],
       query: ({ token, ...body }) => ({
-        body: body,
+        body,
         headers: {
           Authorization: `Bearer ${token}`,
         },

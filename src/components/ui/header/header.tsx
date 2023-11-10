@@ -76,9 +76,13 @@ export const Header = ({ search = false }: HeaderPropsType) => {
           </div>
           <div>
             {isAuth ? (
-              <DropDownMenu trigger={<Avatar />} variant={'profiledrop'}>
+              <DropDownMenu trigger={<Avatar src={data.avatar} />} variant={'profiledrop'}>
                 <DropDownItem
-                  el={{ email: data.email, icon: <Avatar />, title: data.login }}
+                  el={{
+                    email: data.email,
+                    icon: <Avatar src={data.avatar !== 0 ? data.avatar : ''} />,
+                    title: data.login,
+                  }}
                   onSelect={() => navigate('/profile')}
                 />
                 <DropDownItem
