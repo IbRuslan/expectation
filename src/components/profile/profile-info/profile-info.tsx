@@ -7,7 +7,7 @@ import { AuthTypesData } from '@/services'
 import s from './profile-info.module.scss'
 
 type ProfileInfoProps = {
-  changeAvatar: (value: File) => void
+  changeAvatar: (file64: string) => void
   changeName: (value: string) => void
   onLogout: () => void
   userInfo: AuthTypesData
@@ -42,11 +42,24 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
       const file = e.target.files[0]
 
       if (file.size < 4000000) {
-        props.changeAvatar(file)
+        convertFileToBase64(file, (file64: string) => {
+          props.changeAvatar(file64)
+        })
       } else {
         console.log('Файл слишком большого размера')
       }
     }
+  }
+
+  const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
+    const reader = new FileReader()
+
+    reader.onloadend = () => {
+      const file64 = reader.result as string
+
+      callBack(file64)
+    }
+    reader.readAsDataURL(file)
   }
 
   return (

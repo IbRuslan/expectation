@@ -24,12 +24,13 @@ export const ProfilePage = () => {
   const onChangeNameHandler = (value: string) => {
     changeProfile({ login: value, token })
   }
-  const onChangeAvatarHandler = (value: File) => {
-    const avatar = new FormData()
+  const onChangeAvatarHandler = (file64: string) => {
+    // const avatar = new FormData()
+    //
+    // avatar.append('avatar', value, value.name)
+    console.log(file64)
 
-    avatar.append('avatar', value)
-
-    changeProfile({ avatar, token })
+    changeProfile({ avatar: file64, token })
   }
   const onLogoutHandler = () => {
     removeFromLocalStorage('avatar')
