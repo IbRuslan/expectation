@@ -53,7 +53,9 @@ export const Header = ({ search = false }: HeaderPropsType) => {
               <Logo /> Accommodo
             </Typography>
           ) : (
-            <Logo />
+            <Typography as={Link} className={s.pageName} to={'/'} variant={'h1'}>
+              <Logo />
+            </Typography>
           )}
         </div>
         {search ? (
@@ -65,7 +67,7 @@ export const Header = ({ search = false }: HeaderPropsType) => {
         )}
         <div className={s.auth}>
           <div className={s.button}>
-            <Button as={Link} className={s.buttonLink} to={'/adsPage'} variant={'link'}>
+            <Button as={Link} className={s.buttonLink} to={'/createad'} variant={'link'}>
               {windowSize > 710 ? 'Разместить обьявления' : <Ads />}
             </Button>
           </div>
@@ -76,7 +78,10 @@ export const Header = ({ search = false }: HeaderPropsType) => {
           </div>
           <div>
             {isAuth ? (
-              <DropDownMenu trigger={<Avatar src={data.avatar} />} variant={'profiledrop'}>
+              <DropDownMenu
+                trigger={<Avatar size={'45'} src={data.avatar} />}
+                variant={'profiledrop'}
+              >
                 <DropDownItem
                   el={{
                     email: data.email,

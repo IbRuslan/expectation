@@ -53,6 +53,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
 
+  margin-top: 50px;
+
   @media (width <= 1300px) {
     grid-template-columns: repeat(3, 1fr);
   }

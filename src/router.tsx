@@ -8,6 +8,7 @@ import {
 
 import {
   AdsPage,
+  CreateAdPage,
   FavoritesPage,
   NotFound,
   ProfilePage,
@@ -49,6 +50,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <FavoritesPage />,
     path: '/favorites',
+  },
+  {
+    element: <CreateAdPage />,
+    path: '/createad',
   },
 ]
 

@@ -88,7 +88,7 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
       </Typography>
       <div className={s.icon}>
         <Avatar size={'100'} src={userInfo.avatar ? userInfo.avatar : ''} />
-        <label className={s.editIcon} htmlFor={'upload'}>
+        <label className={s.editIconPhoto} htmlFor={'upload'}>
           <ChangeIcon />
           <input
             accept={'image/*'}
@@ -109,14 +109,16 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
           )}
         </>
       ) : (
-        <Typography as={'h3'} className={s.name} variant={'body1'}>
-          <>
-            {userInfo.login}
-            <div className={s.editIcon} onClick={() => setOpen(true)}>
-              <ChangeIcon />
-            </div>
-          </>
-        </Typography>
+        <div className={s.name_wrapper}>
+          <Typography as={'h3'} className={s.name} variant={'body1'}>
+            <>
+              {userInfo.login}
+              <div className={s.editIcon} onClick={() => setOpen(true)}>
+                <ChangeIcon />
+              </div>
+            </>
+          </Typography>
+        </div>
       )}
 
       <Typography className={s.email} variant={'body2'}>

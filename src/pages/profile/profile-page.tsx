@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { ProfileInfo } from '@/components/profile'
 import { Header, LinearLoader } from '@/components/ui'
@@ -8,12 +8,18 @@ import { addToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '
 export const ProfilePage = () => {
   const navigate = useNavigate()
 
-  const token: string = getFromLocalStorage('token')
+  const token = getFromLocalStorage('token')
 
-  const { data: users } = useAuthMeQuery(token)
-  const [changeProfile, { isError, isLoading }] = useChangeProfileMutation()
+  const { data: users, isError } = useAuthMeQuery(token)
+  const [changeProfile, { isError: isErrorChange, isLoading }] = useChangeProfileMutation()
 
-  if (!isError && users) {
+  if (isError && token === 0) {
+    return <Navigate replace to={'./login'} />
+  } else {
+    /* empty */
+  }
+
+  if (!isErrorChange && users) {
     addToLocalStorage('avatar', users.avatar)
     addToLocalStorage('login', users.login)
     addToLocalStorage('email', users.email)
@@ -25,11 +31,6 @@ export const ProfilePage = () => {
     changeProfile({ login: value, token })
   }
   const onChangeAvatarHandler = (file64: string) => {
-    // const avatar = new FormData()
-    //
-    // avatar.append('avatar', value, value.name)
-    console.log(file64)
-
     changeProfile({ avatar: file64, token })
   }
   const onLogoutHandler = () => {
