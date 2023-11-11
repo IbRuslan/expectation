@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import { ChangeIcon, LogoutIcon } from '@/assets/icons'
 import { Avatar, Button, Card, TextField, Typography } from '@/components/ui'
 import { AuthTypesData } from '@/services'
-import imageCompression from 'browser-image-compression';
+import imageCompression from 'browser-image-compression'
 
 import s from './profile-info.module.scss'
 
@@ -52,30 +52,34 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
     }
   }
 
-  const convertFileToBase64 = (file, callBack) => {
+  const convertFileToBase64 = (file: File, callBack: (file64: string) => void) => {
     // Использую библиотеку browser-image-compression для сжатия файла base64, т.к тело слишком большое, а позволять запросам быть огромными со стороны сервера - опасно
     const options = {
       maxSizeMB: 3, // Максимальный размер сжатого изображения в мегабайтах
       maxWidthOrHeight: 1400, // Максимальная ширина или высота сжатого изображения
-      useWebWorker: true // Использовать веб-воркер для ускорения процесса сжатия (опционально)
-    };
+      useWebWorker: true, // Использовать веб-воркер для ускорения процесса сжатия (опционально)
+    }
 
     imageCompression(file, options)
-        .then(compressedFile => {
-          const reader = new FileReader();
+      .then(compressedFile => {
+        const reader = new FileReader()
 
-          reader.onloadend = () => {
-            const file64 = reader.result;
+        reader.onloadend = () => {
+          const file64 = reader.result
 
-            callBack(file64);
-          };
+          if (typeof file64 === 'string') {
+            callBack(file64)
+          } else {
+            console.log('Ошибка чтения файла в формате base64')
+          }
+        }
 
-          reader.readAsDataURL(compressedFile);
-        })
-        .catch(error => {
-          console.log('Ошибка сжатия изображения:', error);
-        });
-  };
+        reader.readAsDataURL(compressedFile)
+      })
+      .catch(error => {
+        console.log('Ошибка сжатия изображения:', error)
+      })
+  }
 
   return (
     <Card className={s.wrapper}>
@@ -87,11 +91,11 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
         <label className={s.editIcon} htmlFor={'upload'}>
           <ChangeIcon />
           <input
+            accept={'image/*'}
             id={'upload'}
             onChange={onChangeProfilePhotoHandler}
             style={{ display: 'none' }}
             type={'file'}
-            accept="image/*"
           />
         </label>
       </div>
