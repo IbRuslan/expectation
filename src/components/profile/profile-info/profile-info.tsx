@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from 'react'
 import { ChangeIcon, LogoutIcon } from '@/assets/icons'
 import { Avatar, Button, Card, TextField, Typography } from '@/components/ui'
 import { AuthTypesData } from '@/services'
+import imageCompression from 'browser-image-compression';
 
 import s from './profile-info.module.scss'
 
@@ -51,16 +52,30 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
     }
   }
 
-  const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
-    const reader = new FileReader()
+  const convertFileToBase64 = (file, callBack) => {
+    // Использую библиотеку browser-image-compression для сжатия файла base64, т.к тело слишком большое, а позволять запросам быть огромными со стороны сервера - опасно
+    const options = {
+      maxSizeMB: 3, // Максимальный размер сжатого изображения в мегабайтах
+      maxWidthOrHeight: 1400, // Максимальная ширина или высота сжатого изображения
+      useWebWorker: true // Использовать веб-воркер для ускорения процесса сжатия (опционально)
+    };
 
-    reader.onloadend = () => {
-      const file64 = reader.result as string
+    imageCompression(file, options)
+        .then(compressedFile => {
+          const reader = new FileReader();
 
-      callBack(file64)
-    }
-    reader.readAsDataURL(file)
-  }
+          reader.onloadend = () => {
+            const file64 = reader.result;
+
+            callBack(file64);
+          };
+
+          reader.readAsDataURL(compressedFile);
+        })
+        .catch(error => {
+          console.log('Ошибка сжатия изображения:', error);
+        });
+  };
 
   return (
     <Card className={s.wrapper}>
@@ -76,6 +91,7 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
             onChange={onChangeProfilePhotoHandler}
             style={{ display: 'none' }}
             type={'file'}
+            accept="image/*"
           />
         </label>
       </div>
