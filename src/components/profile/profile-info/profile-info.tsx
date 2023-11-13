@@ -91,7 +91,7 @@ export const ProfileInfo = ({ changeName, onLogout, userInfo, ...props }: Profil
           </Typography>
         </div>
       )}
-
+      <Typography variant={'body1'}>{userInfo.phone}</Typography>
       <Typography className={s.email} variant={'body2'}>
         {userInfo.email}
       </Typography>

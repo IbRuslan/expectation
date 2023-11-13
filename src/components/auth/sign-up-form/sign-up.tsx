@@ -16,7 +16,7 @@ const signUpSchema = z
     login: z.string().min(4, 'Too short name'),
     password: z.string().min(3, 'Too short password'),
     passwordConfirm: z.string().nonempty('Confirm your password'),
-    phone: z.string().regex(phoneRegex, 'Wrong number').optional(),
+    phone: z.string().regex(phoneRegex, 'Wrong number'),
   })
   .superRefine((data, ctx) => {
     if (data.password !== data.passwordConfirm) {

@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { ImageIcon } from '@/assets/icons'
+import { ImageIcon, TrashIcon } from '@/assets/icons'
 import { ControlledTextField } from '@/components/controlled'
 import { Button, Card, Typography } from '@/components/ui'
 import { convertFileToBase64 } from '@/utils'
@@ -44,7 +44,7 @@ const schema = z.object({
 export type FormCreateAd = z.infer<typeof schema>
 
 type CreateAdFormProps = {
-  onSubmit: (data: FormCreateAd) => void
+  onSubmit: (data: FormCreateAd, photos: string[]) => void
 }
 
 export const CreateAdForm = (props: CreateAdFormProps) => {
@@ -78,7 +78,13 @@ export const CreateAdForm = (props: CreateAdFormProps) => {
     }
   }
 
-  const handleFormSubmitted = handleSubmit(props.onSubmit)
+  // const onClickDeletePhotoHandler = (index: string) => {}
+
+  const inSubmit = (data: FormCreateAd) => {
+    props.onSubmit(data, selectedPhotos)
+  }
+
+  const handleFormSubmitted = handleSubmit(inSubmit)
 
   return (
     <form onSubmit={handleFormSubmitted}>
@@ -136,6 +142,9 @@ export const CreateAdForm = (props: CreateAdFormProps) => {
                 {selectedPhotos.map((photo, index) => (
                   <div className={s.photo_wrapper} key={index}>
                     <img alt={`Photo ${index}`} className={s.photo} src={photo} />
+                    <div className={s.trash}>
+                      <TrashIcon />
+                    </div>
                   </div>
                 ))}
               </div>
