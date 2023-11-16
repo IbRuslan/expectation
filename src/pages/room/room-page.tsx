@@ -9,7 +9,7 @@ export const RoomPage = () => {
   const { roomId } = useParams<{ roomId: string }>()
   const { data: room, isError, isLoading } = useGetRoomByIdQuery({ roomId: roomId || '' })
 
-  if (isError || !room) {
+  if (isError) {
     return <Navigate to={'/'} />
   }
 
@@ -36,7 +36,7 @@ export const RoomPage = () => {
           <div className={s.room_info}>
             <Card className={s.slider_wrapper}>
               <Slider {...settings} className={s.slider}>
-                {room.images.map(image => (
+                {room?.images.map(image => (
                   <div className={s.image_wrapper} key={image.id}>
                     <img
                       alt={'room'}
@@ -48,29 +48,29 @@ export const RoomPage = () => {
               </Slider>
             </Card>
             <Card className={s.types_wrapper}>
-              <Typography variant={'h1'}>{room.title}</Typography>
-              <Typography variant={'h3'}>{room.price}</Typography>
+              <Typography variant={'h1'}>{room?.title}</Typography>
+              <Typography variant={'h3'}>{room?.price}</Typography>
               <div className={s.types}>
-                <div>{room.ad_type.description}</div>
-                <div>Количество комнайт: {room.count_of_rooms}</div>
-                <div>Общая площадь: {room.apartment_size} м²</div>
+                <div>{room?.ad_type.description}</div>
+                <div>Количество комнайт: {room?.count_of_rooms}</div>
+                <div>Общая площадь: {room?.apartment_size} м²</div>
               </div>
             </Card>
             <Card className={s.description_wrapper}>
               <Typography variant={'h3'}>{'Описание'}</Typography>
               <div>
-                <Typography variant={'body1'}>{room.description}</Typography>
+                <Typography variant={'body1'}>{room?.description}</Typography>
               </div>
             </Card>
             <Card className={s.user_ad}>
               <Typography variant={'h3'}>{'Описание'}</Typography>
               <div>
                 <div>
-                  <Avatar src={room.user.avatar} />
+                  <Avatar src={room?.user.avatar} />
                 </div>
                 <div>
-                  <Typography variant={'h3'}>{room.user.login}</Typography>
-                  <Typography variant={'h3'}>{room.user.phone}</Typography>
+                  <Typography variant={'h3'}>{room?.user.login}</Typography>
+                  <Typography variant={'h3'}>{room?.user.phone}</Typography>
                 </div>
               </div>
             </Card>
