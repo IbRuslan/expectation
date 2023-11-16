@@ -58,7 +58,7 @@
 }
 
 .email {
-  margin: 10px 0 40px;
+  margin: 10px 0;
   color: var(--color-dark-900);
   text-align: center;
   opacity: 0.5;
@@ -67,6 +67,7 @@
 .buttons {
   display: flex;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .button {

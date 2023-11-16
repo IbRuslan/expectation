@@ -28,7 +28,7 @@ export const Rooms = ({ room }: RoomsProps) => {
             <img
               alt={'photo'}
               className={s.photo}
-              src={`https://domtut.uz/resources/uploads/post/kakuyu-kvartiru-mozhno-kupit-v-tashkente-za-50000-v-novostroyke.jpg`}
+              src={`https://test-backend-server.site/public/img/${room.images[0].filename}`}
             />
             <div className={s.type}>
               <Typography variant={'body2'}>{room.ad_type.description}</Typography>

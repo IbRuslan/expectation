@@ -50,6 +50,7 @@ export type RoomObject = {
   created_at: string
   description: string
   id: number
+  images: RoomImagesData[]
   is_hidden: number
   price: string
   title: string
@@ -61,4 +62,12 @@ export type RoomsLinks = {
   active: boolean
   label: string
   url?: any
+}
+
+export type RoomImagesData = {
+  created_at: string
+  filename: string
+  id: number
+  pivot: { ad_id: number; image_id: number }
+  updated_at: string
 }

@@ -11,6 +11,8 @@ export const AdsPage = () => {
 
   const { data: myAds, isError, isLoading } = useGetMyAdsQuery(token)
 
+  console.log(myAds)
+
   if (isError && token === 0) {
     return <Navigate replace to={'/login'} />
   } else if (isError) {

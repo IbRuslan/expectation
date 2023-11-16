@@ -3,7 +3,7 @@ import { GetMyAdsResponce } from '@/services/myAds/my-ads.types'
 
 export const MyAdsService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    createAd: builder.mutation<any, any>({
+    createAd: builder.mutation<GetMyAdsResponce, any>({
       invalidatesTags: ['myAds'],
       query: ({ token, ...body }) => {
         return {
@@ -16,7 +16,7 @@ export const MyAdsService = baseApi.injectEndpoints({
         }
       },
     }),
-    getMyAds: builder.query<GetMyAdsResponce, any>({
+    getMyAds: builder.query<any, any>({
       providesTags: ['myAds'],
       query: body => ({
         headers: {

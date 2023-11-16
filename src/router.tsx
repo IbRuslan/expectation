@@ -34,7 +34,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <RoomPage />,
-    path: '/rooms/:roomsId',
+    path: '/rooms/:roomId',
   },
 ]
 

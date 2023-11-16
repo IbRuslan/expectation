@@ -21,9 +21,10 @@ const schema = z.object({
     .refine(val => val > 0, { message: 'Число должно быть положительным' }),
   city: z.string().min(4, 'Минимум 4 символа'),
   description: z.string().min(40, 'Минимум 40 символов'),
-  photos: z.array(z.any()).refine(photos => photos.length >= 2 && photos.length <= 10, {
-    message: 'Количество фотографий должно быть от 2 до 10',
-  }),
+  photos: z.array(z.any()),
+  //     .refine(photos => photos.length >= 2 && photos.length <= 10, {
+  //   message: 'Количество фотографий должно быть от 2 до 10',
+  // }),
   price: z
     .string()
     .refine(val => !isNaN(Number(val)), {

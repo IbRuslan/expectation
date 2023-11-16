@@ -25,7 +25,7 @@ export const CreateAdPage = () => {
     { title: 'Дом', value: 'Дом' },
   ]
 
-  const onSubmit = (formData: FormCreateAd) => {
+  const onSubmit = (formData: FormCreateAd, photos: string[]) => {
     createAd({
       ad_type: sell,
       apartment_size: formData.area,
@@ -33,6 +33,7 @@ export const CreateAdPage = () => {
       coordinates: '1234.3334.1234.1234',
       count_of_rooms: formData.rooms,
       description: formData.description,
+      images: photos,
       price: formData.price,
       title: formData.title,
       token,
