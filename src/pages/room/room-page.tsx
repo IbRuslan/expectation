@@ -48,29 +48,39 @@ export const RoomPage = () => {
               </Slider>
             </Card>
             <Card className={s.types_wrapper}>
-              <Typography variant={'h1'}>{room?.title}</Typography>
-              <Typography variant={'h3'}>{room?.price}</Typography>
+              <Typography className={s.title} variant={'h1'}>
+                {room?.title}
+              </Typography>
+              <Typography variant={'h3'}>{room?.price} сум</Typography>
               <div className={s.types}>
-                <div>{room?.ad_type.description}</div>
-                <div>Количество комнайт: {room?.count_of_rooms}</div>
-                <div>Общая площадь: {room?.apartment_size} м²</div>
+                <div className={s.type}>{room?.ad_type.description}</div>
+                <div className={s.type}>Количество комнайт: {room?.count_of_rooms}</div>
+                <div className={s.type}>Общая площадь: {room?.apartment_size} м²</div>
               </div>
             </Card>
             <Card className={s.description_wrapper}>
-              <Typography variant={'h3'}>{'Описание'}</Typography>
+              <Typography className={s.description_title} variant={'h3'}>
+                {'Описание'}
+              </Typography>
               <div>
-                <Typography variant={'body1'}>{room?.description}</Typography>
+                <Typography className={s.description} variant={'body1'}>
+                  {room?.description}
+                </Typography>
               </div>
             </Card>
             <Card className={s.user_ad}>
-              <Typography variant={'h3'}>{'Описание'}</Typography>
-              <div>
+              <Typography className={s.description_title} variant={'h3'}>
+                {'Описание'}
+              </Typography>
+              <div className={s.user_wrapper}>
                 <div>
-                  <Avatar src={room?.user.avatar} />
+                  <Avatar size={'55'} src={room?.user.avatar} />
                 </div>
-                <div>
+                <div className={s.user}>
                   <Typography variant={'h3'}>{room?.user.login}</Typography>
-                  <Typography variant={'h3'}>{room?.user.phone}</Typography>
+                  <Typography className={s.description} variant={'h3'}>
+                    {room?.user.phone}
+                  </Typography>
                 </div>
               </div>
             </Card>
