@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import { FormLoginValues, LoginForm } from '@/components/auth'
+import { Button } from '@/components/ui'
 import { useLoginMutation } from '@/services'
 import { addToLocalStorage, getFromLocalStorage } from '@/utils'
 
@@ -37,8 +38,15 @@ export const SignInPage = () => {
   }
 
   return (
-    <div>
-      <LoginForm onSubmit={onSubmitHandler} />
-    </div>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
+        <Button as={Link} style={{ padding: '10px' }} to={'/'} variant={'link'}>
+          На Главную
+        </Button>
+      </div>
+      <div>
+        <LoginForm onSubmit={onSubmitHandler} />
+      </div>
+    </>
   )
 }

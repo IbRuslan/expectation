@@ -183,3 +183,23 @@
   flex-direction: column;
   gap: 3px;
 }
+
+.phone_wrapper {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.showhandler {
+  cursor: pointer;
+  opacity: 0.8;
+
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.message_wrapper {
+  padding: 10px;
+  cursor: pointer;
+}

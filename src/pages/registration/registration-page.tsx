@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import { FormSignUpValues, SignUp } from '@/components/auth'
+import { Button } from '@/components/ui'
 import { useRegistrationMutation } from '@/services'
 import { addToLocalStorage, getFromLocalStorage } from '@/utils'
 
@@ -39,8 +40,15 @@ export const RegistrationPage = () => {
   }
 
   return (
-    <div>
-      <SignUp onSubmit={onSubmitHandler} />
-    </div>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
+        <Button as={Link} style={{ padding: '10px' }} to={'/'} variant={'link'}>
+          На Главную
+        </Button>
+      </div>
+      <div>
+        <SignUp onSubmit={onSubmitHandler} />
+      </div>
+    </>
   )
 }

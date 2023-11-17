@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import Slider from 'react-slick'
 
+import { ClosedEye, Eye, MessageIcon } from '@/assets/icons'
 import { Avatar, Button, Card, Header, LinearLoader, Typography } from '@/components/ui'
 import { useGetRoomByIdQuery } from '@/services/rooms'
 
@@ -8,6 +10,7 @@ import s from './room-page.module.scss'
 export const RoomPage = () => {
   const { roomId } = useParams<{ roomId: string }>()
   const { data: room, isError, isLoading } = useGetRoomByIdQuery({ roomId: roomId || '' })
+  const [show, setShow] = useState(false)
 
   if (isError) {
     return <Navigate to={'/'} />
@@ -51,7 +54,7 @@ export const RoomPage = () => {
               <Typography className={s.title} variant={'h1'}>
                 {room?.title}
               </Typography>
-              <Typography variant={'h3'}>{room?.price} сум</Typography>
+              <Typography variant={'body1'}>Стоимость: {room?.price} сум</Typography>
               <div className={s.types}>
                 <div className={s.type}>{room?.ad_type.description}</div>
                 <div className={s.type}>Количество комнайт: {room?.count_of_rooms}</div>
@@ -78,9 +81,27 @@ export const RoomPage = () => {
                 </div>
                 <div className={s.user}>
                   <Typography variant={'h3'}>{room?.user.login}</Typography>
-                  <Typography className={s.description} variant={'h3'}>
-                    {room?.user.phone}
-                  </Typography>
+                  <div className={s.phone_wrapper}>
+                    {show ? (
+                      <Typography className={s.description} variant={'h3'}>
+                        {room?.user.phone}
+                      </Typography>
+                    ) : (
+                      <Typography className={s.description} variant={'h3'}>
+                        xxx-xx-xx
+                      </Typography>
+                    )}
+                    <div
+                      className={s.showhandler}
+                      onClick={() => setShow(!show)}
+                      title={show ? 'Скрыть номер' : 'Показать номер'}
+                    >
+                      {show ? <ClosedEye /> : <Eye />}
+                    </div>
+                  </div>
+                </div>
+                <div className={s.message_wrapper} title={'Написать Сообщение'}>
+                  <MessageIcon />
                 </div>
               </div>
             </Card>
